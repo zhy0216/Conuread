@@ -1,0 +1,5 @@
+*.pyc
+.webassets-cache
+dist/
+local_conf.py
+*.nja
