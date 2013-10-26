@@ -3,3 +3,4 @@
 dist/
 local_conf.py
 *.nja
+web/static/bower_components/
