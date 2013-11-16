@@ -20,7 +20,7 @@ def update_req():
     if not os.environ.get("VIRTUAL_ENV"):
         _warn("You are not in an Virtualenv, please activate it first")
         return
-    local("pip freeze > %s/pip_requirements.txt" % CURRENT_PATH)
+    local("pip freeze|grep -v distribute > %s/pip_requirements.txt" % CURRENT_PATH)
 
 def test():
     """Run nose test"""
