@@ -10,7 +10,8 @@
         Explore Resource
     </button>
 
-    <div class="list-group">
+    <div class="list-group scrollable">
+        {% for i in range(5)%}
       <a href="#" class="list-group-item active">
       <span class="badge">14</span>
         Cras justo odio
@@ -22,20 +23,25 @@
       <a href="#" class="list-group-item">Morbi leo risus</a>
       <a href="#" class="list-group-item">Porta ac consectetur ac</a>
       <a href="#" class="list-group-item">Vestibulum at eros</a>
+      {%endfor%}
     </div>
 
 
 
   </div>
-  <div id="content" class="col-md-7">
-
+  <div id="content" class="col-md-7 scrollable">
+        {% for i in range(20)%}
         <div class="panel panel-default">
           <div class="panel-heading">Panel heading without title</div>
           <div class="panel-body">
             Panel content
+            Panel content
+
+            Panel content
           </div>
           <div class="panel-footer">Panel footer</div>
         </div>
+        {%endfor%}
 
 
   </div>

@@ -15,12 +15,18 @@ html, body, #container, #sidebar, #content{
 border-right: 0;
 margin-bottom: 30px;
 }
-
+.scrollable::-webkit-scrollbar{
+    width: 3px;
+}
 #sidebar{
     border-right: 1px solid #dddddd;
     min-width: 200px;
     padding-right: 0;
     padding-left:0;
+}
+#sidebar .list-group{
+    height: -webkit-calc(100% - 175px);
+    overflow-y: auto;
 }
 
 #sidebar .list-group-item{
@@ -48,4 +54,8 @@ border-bottom-left-radius: 0px;
 color: #ffffff;
 background-color: #428bca;
 border-color: #428bca;
+}
+
+#content{
+    overflow-y: auto;
 }
