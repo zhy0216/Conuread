@@ -67,6 +67,11 @@ h3, h4, h5, h6 {
 padding-top: 5px;
 }
 
+.nav-help a{
+  font-weight: 300;
+  color: #999999;
+  font-size: 16px;
+}
 #explore-btn{
 /*    border-radius: 0;
 margin-bottom: 0px;
