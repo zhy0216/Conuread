@@ -6,12 +6,22 @@
         <h1>Conureader</h1>
         <small class="text-muted"><em>the real world rss reader</em></small>
     </div>
-    <button id="explore-btn" type="button" class="btn btn-default btn-lg btn-block">
-        Add Resource
-    </button>
+
+
+    <a id="explore-btn" href="#" class="list-group-item" >Add Resource</a>
+
 
     <div class="list-group scrollable">
         <span class="list-group-header">My SubScribes</span>
+
+      <a  href="#" class="list-group-item active" ><span class="badge">141</span><i class="glyphicon glyphicon-th-list"></i> All Items</a>
+      <a  href="#" class="list-group-item" ><i class="glyphicon glyphicon-star"></i> Start Items</a>
+<!--       <div class="list-group">
+        <a class="list-group-item active"><span> sdsd</span></a>
+      </div> -->
+
+
+
         {% for i in range(15)%}
       <a href="#" class="list-group-item sub-btn" >
       <span class="badge">14</span>
@@ -21,7 +31,7 @@
     </div>
   </div>
 
-  <div id="content" class="col-md-10">
+  <div id="content-container" class="col-md-10">
   <div class="col-md-12">
       {%include "toolbar.html"%}
 
@@ -36,7 +46,7 @@
 
             Panel content
           </div>
-          <div class="panel-footer">Panel footer</div>
+          <div class="panel-footer"><a  href="#" class="" style="color:black;"><i class="glyphicon glyphicon-star-empty"></i> </a></div>
         </div>
         {%endfor%}
 
