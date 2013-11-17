@@ -8,7 +8,7 @@ LESS_DEBUG          = True
 JS_DEBUG            = True
 PRODUCTION          = False
 
-SITENAME            = "projectname"#your site here
+SITENAME            = "GREADER"#your site here
 SITE_DOMAIN         = ""#your site here
 PORT                = "5000"
 SECRET_KEY          = "secret_keyplzchangeit"

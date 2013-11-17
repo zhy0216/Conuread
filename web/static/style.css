@@ -1,0 +1,51 @@
+html, body, #container, #sidebar, #content{
+    height: 100%;
+}
+
+#logo{
+    margin-bottom: 20px;
+}
+
+#logo h1{
+    margin-bottom: 0px;
+}
+
+#explore-btn{
+    border-radius: 0;
+border-right: 0;
+margin-bottom: 30px;
+}
+
+#sidebar{
+    border-right: 1px solid #dddddd;
+    min-width: 200px;
+    padding-right: 0;
+    padding-left:0;
+}
+
+#sidebar .list-group-item{
+    border-right:none;
+}
+
+#sidebar .list-group-item:first-child,
+#sidebar .list-group-item:last-child  {
+border-top-right-radius: 0px;
+border-top-left-radius: 0px;
+border-bottom-right-radius: 0px;
+border-bottom-left-radius: 0px;
+}
+.panel-default > .panel-heading,
+.panel-default > .panel-footer{
+    background-color: white;
+}
+
+.panel,
+.panel-heading,
+.panel-footer{
+    border-radius: 0px;
+}
+.panel-primary > .panel-footer {
+color: #ffffff;
+background-color: #428bca;
+border-color: #428bca;
+}

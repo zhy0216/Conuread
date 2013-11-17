@@ -1,1 +1,55 @@
 {%extends "base.html"%}
+
+{%block content%}
+  <div id="sidebar" class="col-md-2">
+    <div id="logo" class="text-center">
+        <h1>Conureader</h1>
+        <small class="text-muted"><em>the real world rss reader</em></small>
+    </div>
+    <button id="explore-btn" type="button" class="btn btn-default btn-lg btn-block">
+        Explore Resource
+    </button>
+
+    <div class="list-group">
+      <a href="#" class="list-group-item active">
+      <span class="badge">14</span>
+        Cras justo odio
+      </a>
+      <a href="#" class="list-group-item">
+      <span class="badge">14</span>
+        Dapibus ac facilisis in
+        </a>
+      <a href="#" class="list-group-item">Morbi leo risus</a>
+      <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+      <a href="#" class="list-group-item">Vestibulum at eros</a>
+    </div>
+
+
+
+  </div>
+  <div id="content" class="col-md-7">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Panel heading without title</div>
+          <div class="panel-body">
+            Panel content
+          </div>
+          <div class="panel-footer">Panel footer</div>
+        </div>
+
+
+  </div>
+
+  <div id="plugins" class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">Panel heading without title</div>
+      <div class="panel-body">
+        Panel content
+      </div>
+    </div>
+  </div>
+
+
+
+
+{%endblock%}
