@@ -16,18 +16,14 @@
 
       <a  href="#" class="list-group-item sub-btn" ><span class="badge">141</span><i class="glyphicon glyphicon-th-list"></i> All Items</a>
       <a  href="#" class="list-group-item sub-btn" ><i class="glyphicon glyphicon-star"></i> Start Items</a>
-<!--       <div class="list-group">
-        <a class="list-group-item active"><span> sdsd</span></a>
-      </div> -->
 
-
-
-        {% for i in range(15)%}
-      <a href="#" class="list-group-item sub-btn" >
-      <span class="badge">14</span>
-        Cras justo odio
+      {% for site in sites%}
+      <a href="#" class="list-group-item sub-btn" siteid={{site.id}}>
+      <span class="badge">{{cur_user.get_unread_feeds_on_feedsite(site)}}</span>
+        {{site.title}}
       </a>
       {%endfor%}
+
     </div>
   </div>
 
@@ -38,7 +34,7 @@
   </div>
   <div id="content" class="col-md-9 scrollable">
         {% for i in range(20)%}
-        <div class="panel panel-default" articleid="{{i}}">
+        <div class="panel panel-default" feedid="{{i}}">
           <div class="panel-heading">Panel heading without title</div>
           <div class="panel-body">
             Panel content

@@ -20,15 +20,25 @@ class Validator(object):
     def validate_user(cls, email, password):
         return cls.objects(email=email,password=password).first()
 
-class User(Validator):
+class UserInfo(db.EmbeddedDocument):
+    nickname    = db.StringField(required=True)
+
+class UserSetting(db.EmbeddedDocument):
+    theme       = db.StringField(default="google")
+
+class User(db.Document):
     info            = db.EmbeddedDocumentField("UserInfo")
     setting         = db.EmbeddedDocumentField("UserSetting")
     type            = "user"
 
+    meta = {
+        'allow_inheritance': True,
+        'index_types': False,
+        'indexes': [
+        ]
+    }
 
-    @property
-    def nickname(self):
-        return self.info.nickname
+
 
     @classmethod
     def get_user_by_id(cls,id):
@@ -37,6 +47,12 @@ class User(Validator):
     @classmethod
     def get_user_by_nickname(cls,nickname):
         return cls.objects(info__nickname=nickname).first()
+
+    def get_rencent_unread_feeds(self):
+        return 
+
+    def get_feedsite_by_user(self):
+        from user_feed import Sub
 
     #
     def has_feedsite(self,feedsite):
@@ -48,7 +64,8 @@ class User(Validator):
         rf  = ReadFeed.get_readfeed_by_feed_and_userid(feed=feed,
                                         userid=self.id)
         if rf.unread:
-            sub  = Sub.get_sub_by_userid_feedsite(userid=self.id,feedsite=feed.feedsite)
+            sub  = Sub.get_sub_by_userid_feedsite(userid=self.id,
+                                                  feedsite=feed.feedsite)
             sub.unread_counter -=1
             sub.save()
         rf.unread = False
@@ -63,22 +80,30 @@ class User(Validator):
         rf  = ReadFeed.get_readfeed_by_feed_and_userid(feed=feed,userid=self.id)
         return not rf.unread
 
-    def add_feed(self,feed_url):
+    def sub_feedsite(self, feedsite=None):
+        from user_feed import Sub
+        from feed import FeedSite
+
+        if self.has_feedsite(feedsite):
+            return None
+
+        Sub.add_sub(self,feedsite)
+        return feedsite
+
+    def add_feedsite(self,feed_url=None):
         from user_feed import Sub
         from feed import FeedSite
 
         fs = FeedSite.get_from_feed_url(feed_url)
         if self.has_feedsite(fs):
             return None
-        fs  = FeedSite.add_from_feed_url(feed_url,parse_immediately =True)
-        self.default_folder.site_list.append(fs)
-        self.default_folder.save()
-        Sub.add_sub(self.id,fs)
+        fs  = FeedSite.add_from_feed_url(feed_url)
+        Sub.add_sub(self,fs)
         return fs
 
     def get_unread_feeds_on_feedsite(self,feedsite):
         from user_feed import Sub
-        counter  = Sub.get_unread_counter_by_userid_feedsite(userid=self.id,
+        counter  = Sub.get_unread_counter_by_user_feedsite(user=self,
                                                             feedsite=feedsite)
         return counter
 
@@ -88,14 +113,13 @@ class User(Validator):
                 "type":self.type
         }
 
-class UserInfo(db.EmbeddedDocument):
-    nickname    = db.StringField(required=True)
-
-class UserSetting(db.EmbeddedDocument):
-    theme       = db.StringField(default="google")
+    @property
+    def nickname(self):
+        return self.info.nickname
 
 
-class BasicUser(db.Document,User):
+
+class BasicUser(User):
     type        = "basic"
 
 
@@ -105,19 +129,7 @@ class BasicUser(db.Document,User):
     def subscribe(self,site):
         pass
 
-class AdvancedUser(db.Document,User):
+class AdvancedUser(User):
     pass
-
-#help other class to access user attributes
-class UserAccesser(object):
-    userid      = db.ObjectIdField() # consider two type of user
-
-    @property
-    def user(self):
-        return BasicUser.get_user_by_id(self.userid) \
-               or  AdvancedUser.get_user_by_id(self.userid)
-
-
-
 
 
