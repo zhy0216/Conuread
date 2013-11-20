@@ -4,7 +4,7 @@ import string,random
 import hashlib
 from datetime import datetime as dt
 
-from web.libs.db import db
+from web.util.db import db
 from .feed import FeedSite,Feed
 
 class Validator(object):

@@ -1,6 +1,6 @@
 
 
-from conure.libs.db import db
+from web.util.db import db
 from .user import UserAccesser
 
 

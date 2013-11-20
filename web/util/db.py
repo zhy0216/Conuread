@@ -2,9 +2,9 @@
 
 import os
 
-from mongoengine import MongoEngine
+from flask.ext.mongoengine import MongoEngine
 
-from projectname.config import conf
+from web.config import conf
 
 def get_db(database=None):
     if not database:
