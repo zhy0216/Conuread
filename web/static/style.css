@@ -115,6 +115,15 @@ border-bottom-left-radius: 0px;
 height: 100%;
 }
 
+#content .panel{
+  padding-right: 30px;
+  padding-left: 50px;
+}
+
+.unactive-panel .panel-heading{
+font-size: 24px;
+font-weight: 800;
+}
 
 .panel-default > .panel-heading,
 .panel-default > .panel-footer{

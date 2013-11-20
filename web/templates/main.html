@@ -33,17 +33,14 @@
 
   </div>
   <div id="content" class="col-md-9 scrollable">
-        {% for i in range(20)%}
-        <div class="panel panel-default" feedid="{{i}}">
-          <div class="panel-heading">Panel heading without title</div>
+        {% for feed in cur_user.get_rencent_unread_feeds()%}
+        <div class="panel panel-default unactive-panel" feedid="{{feed.id}}" feedsiteid="{{feed.feedsite.id}}">
+          <div class="panel-heading">{{feed.title}}</div>
           <div class="panel-body">
-            Panel content
-            Panel content
-
-            Panel content
+            {{feed.content|safe}}
           </div>
           <div class="panel-footer article-controller">
-            <a  href="#" class="star" style="color:black;">
+            <a  href="#" class="star" style="color:black;font-size: 20px;">
               <i class="glyphicon glyphicon-star-empty"></i> 
             </a>
           </div>

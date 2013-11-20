@@ -49,9 +49,11 @@ class User(db.Document):
         return cls.objects(info__nickname=nickname).first()
 
     def get_rencent_unread_feeds(self):
-        return 
+        from user_feed import ReadFeed
 
-    def get_feedsite_by_user(self):
+        return ReadFeed.get_rencent_unread_feeds_by_user(user=self) 
+
+    def get_feedsite(self):
         from user_feed import Sub
 
     #

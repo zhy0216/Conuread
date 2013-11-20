@@ -29,10 +29,10 @@ class Feed(db.Document):
         pass
 
     @classmethod
-    def get_feed_items_by_siteid(cls,siteid,limit=15,offset=0):
+    def get_feed_items_by_site(cls,site,limit=15,offset=0):
         start       = offset*limit
         end         = offset*limit + limit
-        return cls.objects(feedsite=siteid)[start:end]
+        return cls.objects(feedsite=site)[start:end]
 
 
 class FeedSite(db.Document):

@@ -34,10 +34,13 @@ def test_init():
 def test_add():
     from web.model.feed import Feed,FeedSite
     from web.model.user import BasicUser
-    test_url = 'http://feed.williamlong.info/'
-    site = FeedSite.add_from_feed_url(test_url)
+    test_url0 = 'http://feed.williamlong.info/'
+    test_url1 = "http://solidot.org.feedsportal.com/c/33236/f/556826/index.rss"
+    site0 = FeedSite.add_from_feed_url(test_url0)
+    site1 = FeedSite.add_from_feed_url(test_url1)
     b_user = BasicUser.get_user_by_nickname("Guest")
-    b_user.sub_feedsite(site)
+    b_user.sub_feedsite(site0)
+    b_user.sub_feedsite(site1)
 
 
 if __name__ == "__main__":
