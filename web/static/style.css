@@ -130,7 +130,9 @@ height: 100%;
 font-size: 24px;
 font-weight: 800;
 }
-
+.panel-heading a{
+color: black;
+}
 .active-panel .panel-heading{
 font-size: 24px;
 font-weight: 300;
