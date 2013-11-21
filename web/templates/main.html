@@ -34,19 +34,7 @@
 
   </div>
   <div id="content" class="col-md-9 scrollable">
-        {% for feed in feeds%}
-        <div class="panel panel-default unactive-panel" feedid="{{feed.id}}" feedsiteid="{{feed.feedsite.id}}">
-          <div class="panel-heading"><a href="{{feed.link}}">{{feed.title}}</a></div>
-          <div class="panel-body">
-            {{feed.content|safe}}
-          </div>
-          <div class="panel-footer article-controller">
-            <a  href="#" class="star" style="color:black;font-size: 20px;">
-              <i class="glyphicon glyphicon-star-empty"></i> 
-            </a>
-          </div>
-        </div>
-        {%endfor%}
+
   </div>
 
 
@@ -67,17 +55,28 @@
 
 {%block js%}
 <script type="text/javascript">
-
+var feedListData = {{feeds|tojson}};
 
 
 
 </script>
 
-<script type="text/template" id="">
-
-
-
-
+<script type="text/template" id="feedListTemplate">
+{%raw%}
+{% for feed in feeds%}
+<div class="panel panel-default unactive-panel" feedid="{{feed.id}}" feedsiteid="{{feed.feedsiteid}}">
+  <div class="panel-heading"><a href="{{feed.link}}">{{feed.title}}</a></div>
+  <div class="panel-body">
+    {{feed.content|safe}}
+  </div>
+  <div class="panel-footer article-controller">
+    <a  href="#" class="star" style="color:black;font-size: 20px;">
+      <i class="glyphicon glyphicon-star-empty"></i> 
+    </a>
+  </div>
+</div>
+{%endfor%}
+{%endraw%}
 </script>
 
 

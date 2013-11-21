@@ -11,7 +11,7 @@ def read_site(feedsiteid=0):
     sites = FeedSite.objects()
     user = g.user
     if feedsiteid == 0:
-        feeds = user.get_rencent_unread_feeds()
+        feeds = [feed.to_dict() for feed in user.get_rencent_unread_feeds()]
     else:
         pass
 

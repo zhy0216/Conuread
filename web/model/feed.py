@@ -34,6 +34,16 @@ class Feed(db.Document):
         end         = offset*limit + limit
         return cls.objects(feedsite=site)[start:end]
 
+    def to_dict(self):
+        return {
+                "id":str(self.id),
+                "title":self.title,
+                "link":self.link,
+                "content":self.content,
+                "summary":self.summary,
+                "create_date":self.create_date,
+                "feedsiteid":str(self.feedsite.id),
+        }
 
 class FeedSite(db.Document):
     feed_url            = db.StringField(required=True) # the user input
