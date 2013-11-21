@@ -21,9 +21,8 @@ def read_site(feedsiteid=0):
                             feeds=feeds)
 
 
-@app.route("/api/feed", methods=["POST"])
-def feeds():
-    feedsiteid = request.form.get("feedsiteid") or None
+@app.route("/api/feedsite/<feedsiteid>", methods=["GET","POST"])
+def feeds(feedsiteid=None):
     if feedsiteid is None:
         return jsonify(dict(rcode=404))
 

@@ -66,7 +66,7 @@ class FeedSite(db.Document):
     def get_feeds_by_id(cls, feedsiteid, limit=15, page=1):
         start = limit * page - limit
         end = limit * page
-        return Feed.objects(feedsite=feedsiteid).ord_by("create_date")[start:end]
+        return Feed.objects(feedsite=feedsiteid).order_by("-create_date")[start:end]
 
     @classmethod
     def add_from_feed_url(cls,feed_url):

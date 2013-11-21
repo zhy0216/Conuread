@@ -5,7 +5,7 @@ var signal = require('signal').createSignal();
 var SubChooser = require("page/leftsidebar").SubChooser;
 var ContentShower = require("page/contentshower").ContentShower;
 
-require("jquery.routes"); //https://github.com/thorsteinsson/jquery-routes
+require("jquery.routes");
 require("./libs/bootstrap/js/bootstrap.js");
 
 ﻿$(function(){
@@ -16,5 +16,13 @@ require("./libs/bootstrap/js/bootstrap.js");
     signal.subscribe('test', function(){
         console.log("test1");
     });
+
+
+    //define router
+
+    $.routes.add('/feedsite/{feedsiteid:word}', function() {
+        console.log('feedsiteid1:' + this.feedsiteid);
+    });
+
 
 });
