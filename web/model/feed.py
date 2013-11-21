@@ -96,7 +96,10 @@ class FeedSite(db.Document):
 
     @property
     def domain(self):
-        pass
+        import tldextract
+        er = tldextract.extract(self.site_link)
+        return er.subdomain + "." + er.domain + "." + er.suffix
+
 
 
 

@@ -20,6 +20,7 @@
       {% for site in sites%}
       <a href="#" class="list-group-item sub-btn" siteid={{site.id}}>
       <span class="badge">{{cur_user.get_unread_feeds_on_feedsite(site)}}</span>
+      <img src="http://getfavicon.appspot.com/http://{{site.domain}}" class="favicon">
         {{site.title}}
       </a>
       {%endfor%}
