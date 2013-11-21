@@ -131,6 +131,16 @@ font-size: 24px;
 font-weight: 800;
 }
 
+.active-panel .panel-heading{
+font-size: 24px;
+font-weight: 300;
+}
+.active-panel{
+border-left-color: #3d9ae8;
+border-left-width: 2px;
+margin-left: -1px;
+}
+
 .panel-default > .panel-heading,
 .panel-default > .panel-footer{
     background-color: white;
