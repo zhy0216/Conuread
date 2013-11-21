@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session
+from flask import Flask, session, g
 import flask.ext.assets as fassets
 
 import config.conf as conf
@@ -25,11 +25,13 @@ def check_user_before_request():
     if "user" not in session:
         user = BasicUser.get_user_by_nickname("Guest")
         session["user"] = user.to_dict()
-@app.context_processor
-def inject_user():
     userid = session.get('user')["id"]
     user = User.get_user_by_id(userid)
-    return dict(cur_user=user)
+    g.user = user
+    
+@app.context_processor
+def inject_user():
+    return dict(cur_user=g.user)
 
 
 import controllers

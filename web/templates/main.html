@@ -34,7 +34,7 @@
 
   </div>
   <div id="content" class="col-md-9 scrollable">
-        {% for feed in cur_user.get_rencent_unread_feeds()%}
+        {% for feed in feeds%}
         <div class="panel panel-default unactive-panel" feedid="{{feed.id}}" feedsiteid="{{feed.feedsite.id}}">
           <div class="panel-heading">{{feed.title}}</div>
           <div class="panel-body">
@@ -64,3 +64,31 @@
 
 
 {%endblock%}
+
+{%block js%}
+<script type="text/javascript">
+
+
+
+
+</script>
+
+<script type="text/template" id="">
+
+
+
+
+</script>
+
+
+
+
+{%endblock%}
+
+
+
+
+
+
+
+
