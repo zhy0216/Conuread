@@ -10,9 +10,9 @@ require("./libs/bootstrap/js/bootstrap.js");
 
 ﻿$(function(){
     var subchooser = new SubChooser();
-    var contentshower = new ContentShower();
+    var contentShower = new ContentShower();
     subchooser.init();
-    contentshower.init();
+    contentShower.init();
     signal.subscribe('test', function(){
         console.log("test1");
     });
@@ -22,6 +22,17 @@ require("./libs/bootstrap/js/bootstrap.js");
 
     $.routes.add('/feedsite/{feedsiteid:word}', function() {
         console.log('feedsiteid1:' + this.feedsiteid);
+        $.post("/api/feedsite/"+this.feedsiteid,function(data){
+            console.log(data);
+            if(data.rcode == 200){
+                contentShower.setFeedListData(data.feeds);
+                contentShower.scrollTop().cleanTarget().render();
+            }
+        })
+
+
+
+
     });
 
 
