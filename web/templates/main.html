@@ -14,16 +14,9 @@
     <div id="subsribe-chooser" class="list-group scrollable">
         <span class="list-group-header">My SubScribes</span>
 
-      <a  href="#" class="list-group-item sub-btn" ><span class="badge">{{cur_user.get_unread_counter()}}</span><i class="glyphicon glyphicon-th-list"></i> All Items</a>
-      <a  href="#" class="list-group-item sub-btn" ><i class="glyphicon glyphicon-star"></i> Start Items</a>
+      <a  id="all-item-btn" href="#" class="list-group-item sub-btn" ><span class="badge">{{cur_user.get_unread_counter()}}</span><i class="glyphicon glyphicon-th-list"></i> All Items</a>
+      <a  id="star-item-btn" href="#" class="list-group-item sub-btn" ><i class="glyphicon glyphicon-star"></i> Start Items</a>
 
-      {% for site in sites%}
-      <a href="#/feedsite/{{site.id}}" class="list-group-item sub-btn" siteid={{site.id}}>
-      <span class="badge">{{cur_user.get_unread_counter_on_feedsite(site)}}</span>
-      <img src="http://getfavicon.appspot.com/http://{{site.domain}}" class="favicon">
-        {{site.title}}
-      </a>
-      {%endfor%}
 
     </div>
   </div>
@@ -40,7 +33,7 @@
 
 
   <div id="plugins" class="col-md-3">
-    <div class="panel panel-default">
+    <div class="panel panel-default plugin">
       <div class="panel-heading">Panel heading without title</div>
       <div class="panel-body">
         Panel content
@@ -56,7 +49,7 @@
 {%block js%}
 <script type="text/javascript">
 var feedListData = {{feeds|tojson}};
-
+var feedSiteListData = {{sites|tojson}}
 
 
 </script>
@@ -79,7 +72,17 @@ var feedListData = {{feeds|tojson}};
 {%endraw%}
 </script>
 
-
+<script type="text/template" id="feedSiteListTemplate">
+{%raw%}
+{% for site in sites%}
+<a href="#/feedsite/{{site.id}}" class="list-group-item sub-btn" siteid={{site.id}}>
+<span class="badge">{{site.unreadCount}}</span>
+<img src="http://getfavicon.appspot.com/http://{{site.domain}}" class="favicon">
+  {{site.title}}
+</a>
+{%endfor%}
+{%endraw%}
+</script>
 
 
 {%endblock%}

@@ -55,6 +55,7 @@ class User(db.Document):
 
     def get_feedsite(self):
         from user_feed import Sub
+        return Sub.get_feedsite_by_user(user=self)
 
     #
     def has_feedsite(self,feedsite):
