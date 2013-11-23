@@ -69,6 +69,12 @@ class FeedSite(db.Document):
         return Feed.objects(feedsite=feedsiteid).order_by("-create_date")[start:end]
 
     @classmethod
+    def get_unread_feeds_by_id(cls, feedsiteid, limit=15, page=1):
+        start = limit * page - limit
+        end = limit * page
+        pass
+
+    @classmethod
     def add_from_feed_url(cls,feed_url):
         site    = cls.get_from_feed_url(feed_url) or cls(feed_url=feed_url)
         if site.id:

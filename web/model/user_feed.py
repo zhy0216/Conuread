@@ -56,7 +56,7 @@ class Sub(db.Document):
         feeds = Feed.get_feed_items_by_site(site=feedsite,
                                               limit=temp)
         for feed in feeds:
-            ReadFeed.add(feed,user)
+            ReadFeed.add(feed=feed,user=user,feedsite=feedsite)
 
         return sub
 
@@ -78,6 +78,7 @@ class StarFeed(db.Document):
 #user <-> feeds, means user has read the feed
 class ReadFeed(db.Document):
     feed            = db.ReferenceField("Feed")
+    feedsite        = db.ReferenceField("FeedSite")
     user            = db.ReferenceField("User")
     unread          = db.BooleanField(default=True)
 
@@ -90,8 +91,8 @@ class ReadFeed(db.Document):
     }
 
     @classmethod
-    def add(cls,feed,user):
-        return cls(feed=feed,user=user).save()
+    def add(cls,feed=None,user=None,feedsite=None):
+        return cls(feed=feed,user=user,feedsite=feedsite).save()
 
     def safe_save(self):
         self.save()
@@ -105,5 +106,8 @@ class ReadFeed(db.Document):
         return [rf.feed for rf in cls.objects(user=user, unread=True)\
                                      .only("feed").order_by("-feed__create_date")]
 
-
+    @classmethod
+    def get_rencent_unread_feeds_by_user_feedsite(cls, user=None, feedsite=None):
+        return [rf.feed for rf in cls.objects(user=user, unread=True, feedsite=feedsite)\
+                                     .only("feed").order_by("-feed__create_date")]
 

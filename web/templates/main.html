@@ -76,7 +76,9 @@ var feedSiteListData = {{sites|tojson}}
 {%raw%}
 {% for site in sites%}
 <a href="#/feedsite/{{site.id}}" class="list-group-item sub-btn" siteid={{site.id}}>
+{%if site.unreadCount != 0%}
 <span class="badge">{{site.unreadCount}}</span>
+{%endif%}
 <img src="http://getfavicon.appspot.com/http://{{site.domain}}" class="favicon">
   {{site.title}}
 </a>

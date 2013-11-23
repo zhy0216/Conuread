@@ -36,7 +36,7 @@ def feeds(feedsiteid=None):
     if feedsiteid is None:
         return jsonify(dict(rcode=404))
 
-    feeds = [feed.to_dict() for feed in FeedSite.get_feeds_by_id(feedsiteid)]
+    feeds = [feed.to_dict() for feed in g.user.get_unread_feeds_on_feedsite(feedsiteid)]
     return jsonify(dict(rcode=200, feeds=feeds))
 
 @app.route("/api/feed/<feedid>/read",methods=["POST"])
