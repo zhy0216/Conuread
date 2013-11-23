@@ -29,6 +29,13 @@ class Sub(db.Document):
         return cls.objects(user=user,feedsite=feedsite).first()
 
     @classmethod
+    def get_unread_counter_by_user(cls,user=None):
+        subs = cls.objects(user=user).only("unread_counter")
+        if len(subs):
+            return sum(map(lambda x:x.unread_counter, subs))
+        return 0
+
+    @classmethod
     def get_unread_counter_by_user_feedsite(cls,user=None,feedsite=None):
         sub = cls.objects(user=user,feedsite=feedsite).only("unread_counter").first()
         if sub:

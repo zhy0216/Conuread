@@ -103,7 +103,11 @@ class User(db.Document):
         Sub.add_sub(self,fs)
         return fs
 
-    def get_unread_feeds_on_feedsite(self,feedsite):
+    def get_unread_counter(self):
+        from user_feed import Sub
+        return Sub.get_unread_counter_by_user(user=self)
+
+    def get_unread_counter_on_feedsite(self,feedsite):
         from user_feed import Sub
         counter  = Sub.get_unread_counter_by_user_feedsite(user=self,
                                                             feedsite=feedsite)
