@@ -27,6 +27,11 @@ def check_user_before_request():
         session["user"] = user.to_dict()
     userid = session.get('user')["id"]
     user = User.get_user_by_id(userid)
+
+    # this for when clear db usage
+    if user is None:
+        user = BasicUser.get_user_by_nickname("Guest")
+        session["user"] = user.to_dict()
     g.user = user
     
 @app.context_processor
