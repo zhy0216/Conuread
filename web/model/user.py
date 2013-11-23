@@ -63,10 +63,10 @@ class User(db.Document):
 
     def read_feed(self,feed):
         from user_feed import ReadFeed,Sub
-        rf  = ReadFeed.get_readfeed_by_feed_and_userid(feed=feed,
-                                        userid=self.id)
+        rf  = ReadFeed.get_readfeed_by_feed_and_user(feed=feed,
+                                        user=self)
         if rf.unread:
-            sub  = Sub.get_sub_by_userid_feedsite(userid=self.id,
+            sub  = Sub.get_sub_by_user_feedsite(user=self,
                                                   feedsite=feed.feedsite)
             sub.unread_counter -=1
             sub.save()
