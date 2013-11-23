@@ -1,0 +1,6 @@
+
+* make leftside bar MVC -> site model, left bar template, signal control
+* reconsider how to deal with add resource
+* user can setting -> MVC
+* user can share their rss sub -> /user/<userid>/rss??
+
