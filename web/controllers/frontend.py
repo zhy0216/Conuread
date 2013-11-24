@@ -52,10 +52,12 @@ def feeds(feedsiteid=None):
     if feedsiteid is None:
         return jsonify(dict(rcode=404))
 
-    if feedsiteid == "all" or feedsiteid == "star":
-        return jsonify(dict(rcode=200, feeds=[]))
-
-    feeds = [feed.to_dict() for feed in g.user.get_unread_feeds_on_feedsite(feedsiteid)]
+    if feedsiteid == "all":
+        feeds = [feed.to_dict() for feed in g.user.get_rencent_unread_feeds()]
+    elif feedsiteid == "star":
+        feeds = []
+    else:
+        feeds = [feed.to_dict() for feed in g.user.get_unread_feeds_on_feedsite(feedsiteid)]
     return jsonify(dict(rcode=200, feeds=feeds))
 
 @app.route("/api/feed/<feedid>/read",methods=["POST"])

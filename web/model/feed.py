@@ -50,7 +50,7 @@ class FeedSite(db.Document):
     site_link           = db.StringField() # we calculate it
     title               = db.StringField()
     fav_icon            = db.StringField() # url->need site_link
-    last_pub_time       = db.DateTimeField() #the last feeditem's time
+    last_pub_time       = db.DateTimeField() #the last time the web site change rss
 
     meta = {
         'allow_inheritance': False,
