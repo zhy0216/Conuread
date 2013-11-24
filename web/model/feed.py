@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-
+import time
 import feedparser
 
 from web.util.db import db
@@ -11,7 +11,7 @@ class Feed(db.Document):
     link                = db.StringField()
     content             = db.StringField()
     summary             = db.StringField()
-    create_date         = db.DateTimeField(default=datetime.datetime.now) #
+    create_date         = db.DateTimeField() # this is item publish date
 
     feedsite            = db.ReferenceField("FeedSite")
 
@@ -112,6 +112,7 @@ class FeedSite(db.Document):
             feed.content        = entry.description
             feed.summary        = entry.summary
             feed.feedsite       = self
+            feed.create_date    = datetime.datetime.fromtimestamp(time.mktime(entry.published_parsed))
             feed.save()
 
     @property
