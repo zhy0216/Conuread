@@ -58,7 +58,7 @@ var feedSiteListData = {{sites|tojson}}
 {%raw%}
 {% for feed in feeds%}
 <div class="panel panel-default unactive-panel" feedid="{{feed.id}}" feedsiteid="{{feed.feedsiteid}}">
-  <div class="panel-heading"><a href="{{feed.link}}">{{feed.title}}</a></div>
+  <div class="panel-heading"><a href="javascript:window.open('{{feed.link}}')">{{feed.title}}</a></div>
   <div class="panel-body">
     {{feed.content|safe}}
   </div>
