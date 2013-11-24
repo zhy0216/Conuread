@@ -75,7 +75,7 @@ var feedSiteListData = {{sites|tojson}}
 <script type="text/template" id="feedSiteListTemplate">
 {%raw%}
 {% for site in sites%}
-<a href="#/feedsite/{{site.id}}" class="list-group-item sub-btn" siteid={{site.id}}>
+<a class="list-group-item sub-btn" feedsiteid={{site.id}}>
 {%if site.unreadCount != 0%}
 <span class="badge">{{site.unreadCount}}</span>
 {%endif%}
