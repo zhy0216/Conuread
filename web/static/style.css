@@ -180,3 +180,6 @@ border-color: #428bca;
     overflow-y: auto;
 }
 
+#sidebar .popover{
+  min-width: 365px;
+}

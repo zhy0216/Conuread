@@ -6,6 +6,7 @@ var SubChooser = require("page/leftsidebar").SubChooser;
 var ContentShower = require("page/contentshower").ContentShower;
 
 require("jquery.routes");
+require("jquery.ba-outside-events");
 require("./libs/bootstrap/js/bootstrap.js");
 
 ﻿$(function(){
