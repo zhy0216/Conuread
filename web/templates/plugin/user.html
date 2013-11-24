@@ -1,0 +1,17 @@
+<div class="panel panel-default plugin">
+  <div class="panel-heading">Login as User: <a href>{{cur_user.id}}</a></div>
+  <div class="panel-body">
+    Login or Set Up Your account
+    {%if not cur_user.username %}
+    <input class="form-control" placeholder="Username" />
+    {%endif%}
+    {%if not cur_user.password %}
+    <input type=password class="form-control" placeholder="Password" />
+    {%endif%}
+    <a href="#" class="btn btn-primary btn-block">submit</a>
+  </div>
+<!--   
+<div class="panel-footer">
+  </div> 
+  -->
+</div>

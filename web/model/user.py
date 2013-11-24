@@ -27,6 +27,7 @@ class UserSetting(db.EmbeddedDocument):
     theme       = db.StringField(default="google")
 
 class User(db.Document):
+    activate        db.BooleanField(default=False)
     info            = db.EmbeddedDocumentField("UserInfo")
     setting         = db.EmbeddedDocumentField("UserSetting")
     type            = "user"
@@ -38,7 +39,9 @@ class User(db.Document):
         ]
     }
 
-
+    @classmethod
+    def gen_user(cls):
+        return cls().save()
 
     @classmethod
     def get_user_by_id(cls,id):
