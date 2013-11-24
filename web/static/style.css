@@ -182,6 +182,11 @@ border-color: #428bca;
 
 #sidebar .popover{
   min-width: 365px;
+  z-index: -1;
+}
+
+#sidebar .popover.in{
+    z-index: 1;
 }
 
 .feed-extra-info{
