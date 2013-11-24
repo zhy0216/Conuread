@@ -55,7 +55,7 @@ class Sub(db.Document):
 
         feeds = Feed.get_feed_items_by_site(site=feedsite,
                                               limit=temp)
-        for feed in feeds:
+        for feed in feeds[:15]:
             ReadFeed.add(feed=feed,user=user,feedsite=feedsite)
 
         return sub
