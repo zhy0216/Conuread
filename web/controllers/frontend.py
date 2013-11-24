@@ -8,7 +8,7 @@ from web.model import (FeedSite, Feed, Sub)
 
 @app.route('/')
 @app.route('/feedsite/<feedsiteid>')
-def read_site(feedsiteid=0):
+def read_site(feedsiteid="all"):
     user = g.user
     sites = user.get_feedsite()
     site_dict = []
@@ -21,20 +21,24 @@ def read_site(feedsiteid=0):
         site_dict.append(d)
 
 
-    if feedsiteid == 0:
+    if feedsiteid == "all":
         feeds = [feed.to_dict() for feed in user.get_rencent_unread_feeds()]
     else:
         pass
 
     return render_template("main.html", 
                             sites=site_dict,
-                            feeds=feeds)
+                            feeds=feeds,
+                            feedsiteid=feedsiteid)
 
 
 @app.route("/api/feedsite/<feedsiteid>", methods=["GET","POST"])
 def feeds(feedsiteid=None):
     if feedsiteid is None:
         return jsonify(dict(rcode=404))
+
+    if feedsiteid == "all" or feedsiteid == "star":
+        return jsonify(dict(rcode=200, feeds=[]))
 
     feeds = [feed.to_dict() for feed in g.user.get_unread_feeds_on_feedsite(feedsiteid)]
     return jsonify(dict(rcode=200, feeds=feeds))
