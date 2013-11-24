@@ -43,6 +43,7 @@ class Feed(db.Document):
                 "summary":self.summary,
                 "createDate":self.create_date,
                 "feedsiteid":str(self.feedsite.id),
+                "author":self.feedsite.title
         }
 
 class FeedSite(db.Document):
