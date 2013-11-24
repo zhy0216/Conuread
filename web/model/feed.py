@@ -96,6 +96,8 @@ class FeedSite(db.Document):
 
     # only use when the site get feed_url
     # to create feedsite object
+    # error handle?
+    # TODO
     def _parse(self):
         d = feedparser.parse(self.feed_url)
         self.title          = d.feed.title
@@ -104,7 +106,7 @@ class FeedSite(db.Document):
         #to get fav_icon
 
         #parse the feeditem
-        for entry in d.entries[::-1]:
+        for entry in d.entries:
             feed                = Feed(title=entry.title)
             feed.link           = entry.link
             feed.content        = entry.description

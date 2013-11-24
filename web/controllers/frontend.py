@@ -31,6 +31,21 @@ def read_site(feedsiteid="all"):
                             feeds=feeds,
                             feedsiteid=feedsiteid)
 
+@app.route("/api/feedsite/sub", methods=["POST"])
+def sub_site():
+    url = request.form.get("url")
+    feedsite =  FeedSite.add_from_feed_url(url)
+    if feedsite == None:
+        return jsonify(dict(rcode=404))
+    g.user.sub_feedsite(feedsite)
+    site_dict = {}
+    site_dict["id"] = str(feedsite.id)
+    site_dict["domain"] = feedsite.domain
+    site_dict["unreadCount"] = g.user.get_unread_counter_on_feedsite(feedsite)
+    site_dict["title"] = feedsite.title
+
+    return jsonify(dict(rcode=200, feedsite=site_dict))
+
 
 @app.route("/api/feedsite/<feedsiteid>", methods=["GET","POST"])
 def feeds(feedsiteid=None):
