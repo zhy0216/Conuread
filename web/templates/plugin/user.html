@@ -1,7 +1,8 @@
-<div class="panel panel-default plugin">
+<div class="panel panel-default plugin user-plugin">
   <div class="panel-heading">Login as User: <a href>{{cur_user.id}}</a></div>
   <div class="panel-body">
-    Login or Set Up Your account
+    <p>Login or Set Up Your account</p>
+    <input class="form-control" placeholder="Nickname" value="{{cur_user.nickname}}" />
     {%if not cur_user.username %}
     <input class="form-control" placeholder="Username" />
     {%endif%}

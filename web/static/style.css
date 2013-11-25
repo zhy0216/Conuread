@@ -193,3 +193,10 @@ border-color: #428bca;
   margin-top: 14px;
   font-size: 13px;
 }
+
+
+
+/*plugin style*/
+.user-plugin input{
+  margin-bottom: 20px;
+}
