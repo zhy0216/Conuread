@@ -10,14 +10,14 @@ from web.util.db import db
 from .feed import FeedSite,Feed
 
 class UserInfo(db.EmbeddedDocument):
-    nickname    = db.StringField(required=True)
+    nickname    = db.StringField()
 
 class UserSetting(db.EmbeddedDocument):
     theme       = db.StringField(default="google")
 
 class User(db.Document):
-    username        = db.StringField(required=True)
-    password        = db.StringField(required=True)
+    username        = db.StringField()
+    password        = db.StringField()
     activate        = db.BooleanField(default=False)
     info            = db.EmbeddedDocumentField("UserInfo")
     setting         = db.EmbeddedDocumentField("UserSetting")
@@ -36,7 +36,7 @@ class User(db.Document):
 
     @classmethod
     def gen_user(cls):
-        return cls(info=UserInfo(nickname=Faker().name()), setting=UserSetting()).save()
+        return cls(info=UserInfo(), setting=UserSetting()).save()
 
     @classmethod
     def get_user_by_id(cls,id):
@@ -142,7 +142,13 @@ class BasicUser(User):
     @classmethod
     def register(cls, username=None, 
                  nickname=None, password=None):
-        pass
+        from flask import g
+        g.user.username = username
+        g.user.setting.nickname = nickname
+        g.user.password = password
+        g.user.activate = True
+
+        return g.user.save()
 
     def upgrade(self):
         pass

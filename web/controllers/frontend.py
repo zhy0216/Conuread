@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import hashlib
+
 from flask import (render_template, g, session,
                    jsonify, request)
 
@@ -38,12 +40,20 @@ def become_user():
     password = request.form.get("password")
     nickname = request.form.get("nickname")
 
-    if User.validate_user(username=username, password=password):
-        pass
+    password = hashlib.sha512(password).hexdigest()
 
-    user = BasicUser.register(username=username, 
-                              password=password, 
-                              nickname=nickname)
+    user = User.validate_user(username=username, 
+                              password=password)
+    if not user:
+        user = BasicUser.register(username=username, 
+                                  password=password, 
+                                  nickname=nickname)
+        g.user = user
+        
+    session["user"] = g.user.to_dict()
+
+
+    return "good"
 
 
 @app.route("/api/feedsite/sub", methods=["POST"])
