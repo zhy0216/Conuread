@@ -9,19 +9,6 @@ from faker import Faker
 from web.util.db import db
 from .feed import FeedSite,Feed
 
-class Validator(object):
-    email       = db.StringField(required=True)
-    password    = db.StringField(required=True)
-
-    @classmethod
-    def is_valid(cls,email,password):
-        user = cls.objects(email=email,password=password).first()
-        return user is not None
-
-    @classmethod
-    def validate_user(cls, email, password):
-        return cls.objects(email=email,password=password).first()
-
 class UserInfo(db.EmbeddedDocument):
     nickname    = db.StringField(required=True)
 
@@ -29,6 +16,8 @@ class UserSetting(db.EmbeddedDocument):
     theme       = db.StringField(default="google")
 
 class User(db.Document):
+    username        = db.StringField(required=True)
+    password        = db.StringField(required=True)
     activate        = db.BooleanField(default=False)
     info            = db.EmbeddedDocumentField("UserInfo")
     setting         = db.EmbeddedDocumentField("UserSetting")
@@ -42,6 +31,10 @@ class User(db.Document):
     }
 
     @classmethod
+    def validate_user(cls, username=None, password=None):
+        return cls.objects(username=username,password=password).first()
+
+    @classmethod
     def gen_user(cls):
         return cls(info=UserInfo(nickname=Faker().name()), setting=UserSetting()).save()
 
@@ -52,6 +45,13 @@ class User(db.Document):
     @classmethod
     def get_user_by_nickname(cls,nickname):
         return cls.objects(info__nickname=nickname).first()
+
+    def is_activate(self):
+        return self.activate
+    
+    def activate_me(self):
+        self.activate = True
+        return self.save()
 
     def get_rencent_unread_feeds(self):
         from user_feed import ReadFeed
@@ -138,6 +138,11 @@ class User(db.Document):
 class BasicUser(User):
     type        = "basic"
 
+
+    @classmethod
+    def register(cls, username=None, 
+                 nickname=None, password=None):
+        pass
 
     def upgrade(self):
         pass

@@ -4,7 +4,8 @@ from flask import (render_template, g, session,
                    jsonify, request)
 
 from web.app import app
-from web.model import (FeedSite, Feed, Sub)
+from web.model import (User, UserInfo,UserSetting,BasicUser,
+                        AdvancedUser,FeedSite, Feed, Sub)
 
 @app.route('/')
 @app.route('/feedsite/<feedsiteid>')
@@ -30,6 +31,20 @@ def read_site(feedsiteid="all"):
                             sites=site_dict,
                             feeds=feeds,
                             feedsiteid=feedsiteid)
+
+@app.route("/become", methods=["POST"])
+def become_user():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    nickname = request.form.get("nickname")
+
+    if User.validate_user(username=username, password=password):
+        pass
+
+    user = BasicUser.register(username=username, 
+                              password=password, 
+                              nickname=nickname)
+
 
 @app.route("/api/feedsite/sub", methods=["POST"])
 def sub_site():
