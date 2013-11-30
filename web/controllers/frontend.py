@@ -45,7 +45,7 @@ def login():
     user = User.validate_user(username=username, 
                               password=password)
     if user is None:
-        return jsonify(dict(rcode==404))
+        return jsonify(dict(rcode=404))
 
     g.user = user
     session["user"] = g.user.to_dict()

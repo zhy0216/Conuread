@@ -9,6 +9,12 @@ from web.app import app
 
 manager = Manager(app)
 
+
+
+@manager.command
+def refresh_site():
+    pass
+
 @manager.command
 def clean_db():
     from pymongo import MongoClient

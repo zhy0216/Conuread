@@ -34,6 +34,10 @@ class Feed(db.Document):
         end         = offset*limit + limit
         return cls.objects(feedsite=site)[start:end]
 
+    @classmethod
+    def is_saved(cls, title=None, date=None):
+        return cls.objects(title=title, create_date=date).first() is not None
+
     def to_dict(self, user=None):
         d = {
                 "id":str(self.id),
@@ -56,7 +60,8 @@ class FeedSite(db.Document):
     site_link           = db.StringField() # we calculate it
     title               = db.StringField()
     fav_icon            = db.StringField() # url->need site_link
-    last_pub_time       = db.DateTimeField() #the last time the web site change rss
+    subtitle            = db.StringField() # a summary for site
+    create_time         = db.DateTimeField(default=datetime.datetime.now)
 
     meta = {
         'allow_inheritance': False,
@@ -84,7 +89,7 @@ class FeedSite(db.Document):
     def add_from_feed_url(cls,feed_url):
         site    = cls.get_from_feed_url(feed_url) or cls(feed_url=feed_url)
         if site.id:
-            site.refresh()
+            pass # send a job to rabbitMQ?
         else:
             site._parse()
 
@@ -97,8 +102,22 @@ class FeedSite(db.Document):
     def get_last_feed(self,skip=0):
         return Feed.objects(feedsite=self).skip(skip).first()
 
-    def refresh(self):
-        print "refresh"
+    @classmethod
+    def refresh(cls):
+        feed_sites = cls.objects().all()
+        for feedsite in feed_sites:
+            d = feedparser.parse(feedsite.feed_url)
+            if "rss" in d.version:
+                feedsite._parse_rss(d)
+            else:
+                feedsite._parse_atom(d)
+
+
+    def _refresh_rss(self):
+        pass
+
+    def _refresh_atom(self):
+        pass
 
     # only use when the site get feed_url
     # to create feedsite object
@@ -106,19 +125,52 @@ class FeedSite(db.Document):
     # TODO
     def _parse(self):
         d = feedparser.parse(self.feed_url)
+        if "rss" in d.version:
+            self._parse_rss(d)
+        else:
+            self._parse_atom(d)
+
+    def _parse_rss(self,d):
         self.title          = d.feed.title
+        self.subtitle       = d.feed.subtitle
         self.site_link      = d.feed.link
         self.save()
         #to get fav_icon
 
         #parse the feeditem
         for entry in d.entries:
+            create_date         = datetime.datetime.fromtimestamp(time.mktime(entry.published_parsed))
+            if Feed.is_saved(title=entry.title, date=create_date):
+                continue
             feed                = Feed(title=entry.title)
             feed.link           = entry.link
-            feed.content        = entry.description
+            if "content" in entry:
+                feed.content    = entry.content[0].value
+            else:
+                feed.content    = entry.description
             feed.summary        = entry.summary
             feed.feedsite       = self
-            feed.create_date    = datetime.datetime.fromtimestamp(time.mktime(entry.published_parsed))
+            feed.create_date    = create_date
+            feed.save()
+
+    def _parse_atom(self,d):
+        self.title          = d.feed.title
+        self.subtitle       = d.feed.subtitle
+        self.site_link      = d.feed.link
+        self.save()
+        #to get fav_icon
+
+        #parse the feeditem
+        for entry in d.entries:
+            create_date         = datetime.datetime.fromtimestamp(time.mktime(entry.published_parsed))
+            if Feed.is_saved(title=entry.title, date=create_date):
+                continue
+            feed                = Feed(title=entry.title)
+            feed.link           = entry.link
+            feed.content        = entry.content[0].value
+            feed.summary        = entry.summary
+            feed.feedsite       = self
+            feed.create_date    = create_date
             feed.save()
 
     @property
