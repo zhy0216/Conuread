@@ -69,7 +69,7 @@ class User(db.Document):
     #
     def has_feedsite(self,feedsite):
         from user_feed import Sub
-        return Sub.exist_sub(self.id,feedsite)
+        return Sub.exist_sub(self,feedsite)
 
     def read_feed(self,feed):
         from user_feed import ReadFeed,Sub
@@ -89,7 +89,7 @@ class User(db.Document):
 
     def has_read(self,feed=None):
         from user_feed import ReadFeed
-        rf  = ReadFeed.get_readfeed_by_feed_and_userid(feed=feed,userid=self.id)
+        rf  = ReadFeed.get_readfeed_by_feed_and_user(feed=feed,user=self)
         return not rf.unread
 
     def has_stared_feed(self, feed=None):

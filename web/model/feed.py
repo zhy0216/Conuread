@@ -52,6 +52,7 @@ class Feed(db.Document):
 
         if user is not None:
             d["isStared"] = user.has_stared_feed(feed=self)
+            d["isRead"] = user.has_read(feed=self)
         return d
 
 

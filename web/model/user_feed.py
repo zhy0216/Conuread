@@ -74,6 +74,7 @@ class Sub(db.Document):
 class StarFeed(db.Document):
     feed            = db.ReferenceField("Feed")
     user            = db.ReferenceField("User")
+    # add feed create date field?
 
     @classmethod
     def user_star_feed(cls, user=None, feed=None):
@@ -100,7 +101,8 @@ class StarFeed(db.Document):
     def get_feed_by_user(cls, user=None, limit=15, page=1):
         start = limit * page - limit
         end = limit * page
-        return [sf.feed for sf in cls.objects(user=user)[start:end]]
+        return sorted([sf.feed for sf in cls.objects(user=user)], 
+                       key=lambda x:x.create_date, reverse=True)[start:end]
 
 
 
@@ -110,6 +112,7 @@ class ReadFeed(db.Document):
     feedsite        = db.ReferenceField("FeedSite")
     user            = db.ReferenceField("User")
     unread          = db.BooleanField(default=True)
+    # add feed create date field?
 
     meta = {
         'allow_inheritance': False,

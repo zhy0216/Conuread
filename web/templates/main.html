@@ -55,7 +55,7 @@ var curActiveFeedSiteId = {{feedsiteid|tojson}};
 <script type="text/template" id="feedListTemplate">
 {%raw%}
 {% for feed in feeds%}
-<div class="panel panel-default unactive-panel" feedid="{{feed.id}}" feedsiteid="{{feed.feedsiteid}}">
+<div class="panel panel-default unactive-panel {%if feed.isRead%}has-read-panel text-muted{%endif%}" feedid="{{feed.id}}" feedsiteid="{{feed.feedsiteid}}">
   <div class="panel-heading">
     <a href="javascript:window.open('{{feed.link}}')">{{feed.title}}</a>
     <small class="pull-right feed-extra-info text-muted">{{feed.author}} - {{feed.createDate}}</small>
