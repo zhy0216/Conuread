@@ -5,6 +5,8 @@ var signal = require('signal').createSignal();
 var SubChooser = require("page/leftsidebar").SubChooser;
 var ContentShower = require("page/contentshower").ContentShower;
 
+var UserPlugin = require("page/userplugin").UserPlugin;
+
 require("jquery.routes");
 require("jquery.ba-outside-events");
 require("./libs/bootstrap/js/bootstrap.js");
@@ -12,8 +14,10 @@ require("./libs/bootstrap/js/bootstrap.js");
 ﻿$(function(){
     var subchooser = new SubChooser();
     var contentShower = new ContentShower();
+    var userPlugin = new UserPlugin();
     subchooser.init();
     contentShower.init();
+    userPlugin.init();
     signal.subscribe('feed-read', subchooser.feedReadAction);
     signal.subscribe('feedsite-fetch', function(feedsiteid){
         console.log(feedsiteid);

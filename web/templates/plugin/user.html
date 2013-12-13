@@ -2,26 +2,37 @@
 <div class="panel panel-default plugin user-plugin">
   <div class="panel-heading">Login as User: <a href>{{cur_user.setting.nickname}}</a></div>
   <div class="panel-body">
+    <button id="logout-btn" class="btn btn-primary" >Logout</button>
   </div>
 </div>
 {%else%}
 <div class="panel panel-default plugin user-plugin">
-     <div class="panel-body">
+    <div class="panel-body">
         <ul class="nav nav-tabs nav-tabs-google">
-          <li class="active"><a href="#">Login</a></li>
-          <li><a href="#">Register</a></li>
+          <li class="active"><a data-toggle="tab" href="#user-login">Login</a></li>
+          <li><a data-toggle="tab" href="#user-register">Register</a></li>
         </ul>
-    <br />
-    <form method="POST" action="/become" >
-    <input class="form-control" placeholder="Nickname" name="nickname" />
-    {%if not cur_user.username %}
-    <input class="form-control" placeholder="Username" name="username" />
-    {%endif%}
-    {%if not cur_user.password %}
-    <input type=password class="form-control" placeholder="Password" name="password" />
-    {%endif%}
-    <button type="submit" class="btn btn-primary btn-block">submit</button>
-    </form>
+        <br />
+
+        <div class="tab-content">
+          <div class="tab-pane active" id="user-login">
+            <form method="POST" action="/login" >
+            <input class="form-control" placeholder="Username" name="username" />
+            <input type=password class="form-control" placeholder="Password" name="password" />
+            <button type="submit" class="btn btn-primary btn-block">submit</button>
+            </form>
+        </div>
+        <div class="tab-pane" id="user-register">
+          <form method="POST" action="/register" >
+          <input class="form-control" placeholder="Nickname" name="nickname" />
+          <input class="form-control" placeholder="Username" name="username" />
+          <input type=password class="form-control" placeholder="Password" name="password" />
+          <button type="submit" class="btn btn-primary btn-block">submit</button>
+          </form>
+
+        </div>
+      </div>
+    
   </div>
 </div>
 {%endif%}
