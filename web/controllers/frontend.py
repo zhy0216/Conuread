@@ -137,4 +137,15 @@ def unread_feed(feedid):
     g.user.unread_feed(feed)
     return jsonify(rcode=200)
 
+@app.route("/api/feed/<feedid>/star",methods=["POST"])
+def star_feed(feedid):
+    feed = Feed.get_feed_by_id(feedid)
+    g.user.star_feed(feed)
+    return jsonify(rcode=200)
 
+
+@app.route("/api/feed/<feedid>/unstar",methods=["POST"])
+def unstar_feed(feedid):
+    feed = Feed.get_feed_by_id(feedid)
+    g.user.unstar_feed(feed)
+    return jsonify(rcode=200)

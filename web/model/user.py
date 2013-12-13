@@ -97,7 +97,7 @@ class User(db.Document):
         from .user_feed import StarFeed
         StarFeed.user_star_feed(user=self, feed=feed)
 
-    def unstart_feed(self, feed):
+    def unstar_feed(self, feed):
         from .user_feed import StarFeed
         StarFeed.user_unstar_feed(user=self, feed=feed)
 
