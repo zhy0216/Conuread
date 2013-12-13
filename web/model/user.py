@@ -144,7 +144,7 @@ class BasicUser(User):
                  nickname=None, password=None):
         from flask import g
         g.user.username = username
-        g.user.setting.nickname = nickname
+        g.user.info.nickname = nickname
         g.user.password = password
         g.user.activate = True
 

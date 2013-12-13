@@ -72,7 +72,32 @@ class Sub(db.Document):
 #user <-> feeds, means use start a feed;
 #it is possible that user can star a feed but have not read it
 class StarFeed(db.Document):
-    pass
+    feed            = db.ReferenceField("Feed")
+    user            = db.ReferenceField("User")
+
+    @classmethod
+    def user_star_feed(cls, user=None, feed=None):
+        sf = cls._get_star_feed_by_user_feed(user=user, feed=feed)
+        if sf is None:
+            sf = cls(feed=feed, user=user).save()
+        return sf
+
+    @classmethod
+    def user_unstar_feed(cls, user=None, feed=None):
+        sf = cls._get_star_feed_by_user_feed(user=user, feed=feed)
+        if sf:
+            sf.delete()
+
+    @classmethod
+    def _get_star_feed_by_user_feed(cls, user=None, feed=None):
+        return cls.objects(user=user, feed=feed).first()
+
+    @classmethod
+    def get_feed_by_user(cls, user=None, limit=15, page=1):
+        start = limit * page - limit
+        end = limit * page
+        return [sf.feed for sf in cls.object(user=user)[start:end]]
+
 
 
 #user <-> feeds, means user has read the feed
