@@ -89,6 +89,10 @@ class StarFeed(db.Document):
             sf.delete()
 
     @classmethod
+    def is_user_star_feed(cls, user=None, feed=None):
+        return cls._get_star_feed_by_user_feed(user=user, feed=feed) is not None
+
+    @classmethod
     def _get_star_feed_by_user_feed(cls, user=None, feed=None):
         return cls.objects(user=user, feed=feed).first()
 
@@ -96,7 +100,7 @@ class StarFeed(db.Document):
     def get_feed_by_user(cls, user=None, limit=15, page=1):
         start = limit * page - limit
         end = limit * page
-        return [sf.feed for sf in cls.object(user=user)[start:end]]
+        return [sf.feed for sf in cls.objects(user=user)[start:end]]
 
 
 

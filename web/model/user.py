@@ -92,6 +92,9 @@ class User(db.Document):
         rf  = ReadFeed.get_readfeed_by_feed_and_userid(feed=feed,userid=self.id)
         return not rf.unread
 
+    def has_stared_feed(self, feed=None):
+        from .user_feed import StarFeed
+        return StarFeed.is_user_star_feed(user=self, feed=feed)
 
     def star_feed(self, feed):
         from .user_feed import StarFeed

@@ -25,7 +25,7 @@ def read_site(feedsiteid="all"):
 
 
     if feedsiteid == "all":
-        feeds = [feed.to_dict() for feed in user.get_rencent_unread_feeds()]
+        feeds = [feed.to_dict(user=g.user) for feed in user.get_rencent_unread_feeds()]
     else:
         pass
 
@@ -117,9 +117,9 @@ def feeds(feedsiteid=None):
         return jsonify(dict(rcode=404))
 
     if feedsiteid == "all":
-        feeds = [feed.to_dict() for feed in g.user.get_rencent_unread_feeds()]
+        feeds = [feed.to_dict(user=g.user) for feed in g.user.get_rencent_unread_feeds()]
     elif feedsiteid == "star":
-        feeds = []
+        feeds = [feed.to_dict(user=g.user) for feed in g.user.get_star_feeds()]
     else:
         feeds = [feed.to_dict() for feed in g.user.get_unread_feeds_on_feedsite(feedsiteid)]
     return jsonify(dict(rcode=200, feeds=feeds))

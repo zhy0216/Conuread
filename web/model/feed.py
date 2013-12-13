@@ -34,8 +34,8 @@ class Feed(db.Document):
         end         = offset*limit + limit
         return cls.objects(feedsite=site)[start:end]
 
-    def to_dict(self):
-        return {
+    def to_dict(self, user=None):
+        d = {
                 "id":str(self.id),
                 "title":self.title,
                 "link":self.link,
@@ -45,6 +45,11 @@ class Feed(db.Document):
                 "feedsiteid":str(self.feedsite.id),
                 "author":self.feedsite.title
         }
+
+        if user is not None:
+            d["isStared"] = user.has_stared_feed(feed=self)
+        return d
+
 
 class FeedSite(db.Document):
     feed_url            = db.StringField(required=True) # the user input
