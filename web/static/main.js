@@ -2,6 +2,7 @@ var $ = require("jquery");
 var _ = require("underscore");
 var signal = require('signal').createSignal(); 
 
+var TopController = require("page/topcontroller").TopController;
 var SubChooser = require("page/leftsidebar").SubChooser;
 var ContentShower = require("page/contentshower").ContentShower;
 
@@ -12,9 +13,11 @@ require("jquery.ba-outside-events");
 require("./libs/bootstrap/js/bootstrap.js");
 
 ﻿$(function(){
+    var topController = new TopController();
     var subchooser = new SubChooser();
     var contentShower = new ContentShower();
     var userPlugin = new UserPlugin();
+    topController.init();
     subchooser.init();
     contentShower.init();
     userPlugin.init();
@@ -29,6 +32,12 @@ require("./libs/bootstrap/js/bootstrap.js");
             }
         })
     });
+
+    signal.subscribe("mark-all-as-read", function(){
+        console.log("mark-all-as-rea signal");
+        // get this cur feedsite and mark it as read
+    })
+
 
     //define router
 

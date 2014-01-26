@@ -68,3 +68,11 @@ def feeds(feedsiteid=None):
     else:
         feeds = [feed.to_dict() for feed in g.user.get_unread_feeds_on_feedsite(feedsiteid)]
     return jsonify(dict(rcode=200, feeds=feeds))
+
+@app.route("/api/feedsite/<feedsiteid>/mark-all-as-read", methods=["POST"])
+def mark_all_as_read(feedsiteid=None):
+    if feedsiteid is None:
+        return jsonify(dict(rcode=404))
+
+
+

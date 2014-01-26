@@ -104,6 +104,10 @@ class StarFeed(db.Document):
         return sorted([sf.feed for sf in cls.objects(user=user)], 
                        key=lambda x:x.create_date, reverse=True)[start:end]
 
+    @classmethod
+    def get_all_unread_feed_by_user(cls, user=None):
+        feeds = [x.feed for x in cls.objects(user=user)]
+        return filter(lambda x: user.has_read(feed=x),feeds)
 
 
 #user <-> feeds, means user has read the feed
