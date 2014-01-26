@@ -23,6 +23,18 @@
     </div>
   </div>
 
+
+<!-- for test -->
+  <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="drop4">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Another action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Something else here</a></li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="http://twitter.com/fat">Separated link</a></li>
+  </ul>
+<!-- end test -->
+
+
   <div id="content-container" class="col-md-10">
   <div class="col-md-12">
       {%include "toolbar.html"%}
@@ -81,7 +93,7 @@ var curActiveFeedSiteId = {{feedsiteid|tojson}};
 <script type="text/template" id="feedSiteListTemplate">
 {%raw%}
 {% for site in sites%}
-<a class="list-group-item sub-btn" feedsiteid={{site.id}}>
+<a class="list-group-item sub-btn sub-show-menu" feedsiteid={{site.id}}>
 {%if site.unreadCount != 0%}
 <span class="badge">{{site.unreadCount}}</span>
 {%endif%}

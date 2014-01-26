@@ -200,3 +200,12 @@ border-color: #428bca;
 .user-plugin input{
   margin-bottom: 20px;
 }
+
+
+
+
+
+/*extra help class*/
+.cursor-pointer{
+  cursor: pointer;
+}

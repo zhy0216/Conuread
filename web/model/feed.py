@@ -145,7 +145,7 @@ class FeedSite(db.Document):
         feeds = []
         for entry in d.entries:
             create_date         = datetime.datetime.fromtimestamp(time.mktime(entry.published_parsed))
-            # print "feedsite title:%s"%entry.title
+            print "feedsite title:%s"%entry.title
             if Feed.is_saved(title=entry.title, date=create_date):
                 continue
             feed                = Feed(title=entry.title)
