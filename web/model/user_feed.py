@@ -65,6 +65,15 @@ class Sub(db.Document):
         return cls.objects(user=user,feedsite=feedsite).first() is not None
 
 
+    @classmethod
+    def refresh_sub(cls, feedsite=None, new_feeds=None):
+        subs = cls.objects(feedsite=feedsite)
+        for sub in subs:
+            sub.unread_counter += len(new_feeds)
+            sub.save()
+
+            for feed in new_feeds:
+                ReadFeed.add(feed=feed,user=sub.user,feedsite=feedsite)
 
 
 # all user sub subscript is in uncategoried folder

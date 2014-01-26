@@ -88,9 +88,10 @@ class FeedSite(db.Document):
 
     @classmethod
     def add_from_feed_url(cls,feed_url):
-        site    = cls.get_from_feed_url(feed_url) or cls(feed_url=feed_url)
+        site    = cls.get_from_feed_url(feed_url)\
+                  or cls(feed_url=feed_url)
         if site.id:
-            pass # send a job to rabbitMQ?
+            return 
         else:
             site._parse()
 
@@ -105,20 +106,22 @@ class FeedSite(db.Document):
 
     @classmethod
     def refresh(cls):
+        from .user_feed import Sub
         feed_sites = cls.objects().all()
         for feedsite in feed_sites:
-            d = feedparser.parse(feedsite.feed_url)
-            if "rss" in d.version:
-                feedsite._parse_rss(d)
-            else:
-                feedsite._parse_atom(d)
+            feeds = feedsite._refresh()
+            if feeds:
+                Sub.refresh_sub(feedsite=feedsite, new_feeds=feeds)
 
 
-    def _refresh_rss(self):
-        pass
 
-    def _refresh_atom(self):
-        pass
+    def _refresh(self):
+        d = feedparser.parse(self.feed_url)
+        if "rss" in d.version:
+            return self._parse_rss(d)
+        else:
+            return self._parse_atom(d)
+
 
     # only use when the site get feed_url
     # to create feedsite object
@@ -139,8 +142,10 @@ class FeedSite(db.Document):
         #to get fav_icon
 
         #parse the feeditem
+        feeds = []
         for entry in d.entries:
             create_date         = datetime.datetime.fromtimestamp(time.mktime(entry.published_parsed))
+            # print "feedsite title:%s"%entry.title
             if Feed.is_saved(title=entry.title, date=create_date):
                 continue
             feed                = Feed(title=entry.title)
@@ -153,6 +158,8 @@ class FeedSite(db.Document):
             feed.feedsite       = self
             feed.create_date    = create_date
             feed.save()
+            feeds.append(feed)
+        return feeds
 
     def _parse_atom(self,d):
         self.title          = d.feed.title
@@ -162,8 +169,10 @@ class FeedSite(db.Document):
         #to get fav_icon
 
         #parse the feeditem
+        feeds = []
         for entry in d.entries:
             create_date         = datetime.datetime.fromtimestamp(time.mktime(entry.published_parsed))
+            
             if Feed.is_saved(title=entry.title, date=create_date):
                 continue
             feed                = Feed(title=entry.title)
@@ -173,6 +182,8 @@ class FeedSite(db.Document):
             feed.feedsite       = self
             feed.create_date    = create_date
             feed.save()
+            feeds.append(feed)
+        return feeds
 
     @property
     def feed_item_counter(self):

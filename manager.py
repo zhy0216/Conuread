@@ -13,7 +13,9 @@ manager = Manager(app)
 
 @manager.command
 def refresh_site():
-    pass
+    from web.model import FeedSite
+    FeedSite.refresh()
+    print "refresh sucessfully"
 
 @manager.command
 def clean_db():
@@ -26,8 +28,8 @@ def clean_db():
 def make_guest():
     from web.model import BasicUser,UserInfo
     b_user = BasicUser(email="guest",
-                          password="guest",
-                          info=UserInfo())
+                       password="guest",
+                       info=UserInfo())
     b_user.info.nickname = "Guest"
     b_user.save()
     
