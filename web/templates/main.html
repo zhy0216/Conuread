@@ -36,17 +36,23 @@
 
 
   <div id="content-container" class="col-md-10">
-  <div class="col-md-12">
+  <div class="col-md-12" style="margin-top:5px">
       {%include "toolbar.html"%}
 
   </div>
+
+  <div class="col-md-9" id="feedSiteHead">
+  
+ 
+  </div>
+
   <div id="content" class="col-md-9 scrollable">
 
   </div>
 
 
 
-  <div id="plugins" class="col-md-3">
+  <div id="plugins" class="col-md-3" style="margin-top: -45px;">
     {%include "plugin/user.html"%}
   </div>
 
@@ -62,6 +68,13 @@ var feedSiteListData = {{sites|tojson}};
 var curActiveFeedSiteId = {{feedsiteid|tojson}};
 
 
+</script>
+
+<script type="text/template" id="feedSiteHeadTemplate">
+{%raw%}
+ <hr />
+<h2 style="margin-top: -10px;margin-bottom: 10px;">{{site.title}} | <a href="">unsubscribe</a></h2>
+{%endraw%}
 </script>
 
 <script type="text/template" id="feedListTemplate">
@@ -93,7 +106,7 @@ var curActiveFeedSiteId = {{feedsiteid|tojson}};
 <script type="text/template" id="feedSiteListTemplate">
 {%raw%}
 {% for site in sites%}
-<a class="list-group-item sub-btn sub-show-menu" feedsiteid={{site.id}}>
+<a class="list-group-item sub-btn sub-show-menu cursor-pointer" feedsiteid={{site.id}}>
 {%if site.unreadCount != 0%}
 <span class="badge">{{site.unreadCount}}</span>
 {%endif%}

@@ -91,7 +91,7 @@ class FeedSite(db.Document):
         site    = cls.get_from_feed_url(feed_url)\
                   or cls(feed_url=feed_url)
         if site.id:
-            return 
+            return site
         else:
             site._parse()
 
