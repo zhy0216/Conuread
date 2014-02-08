@@ -72,6 +72,9 @@ class FeedSite(db.Document):
         ]
     }
 
+    @classmethod
+    def get_feedsite_by_id(cls, feedsiteid):
+        return cls.objects(id=feedsiteid).first()
 
 
     @classmethod

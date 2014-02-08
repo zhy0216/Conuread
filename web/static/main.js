@@ -39,6 +39,18 @@ require("./libs/bootstrap/js/bootstrap.js");
     })
 
 
+    $(document).on("click", "[unsubid]", function(){
+        var feedsiteid = $(this).attr("unsubid");
+        $.post("/api/feedsite/" + feedsiteid + "/unsub")
+         .done(function(data){
+            if(data.rcode == 200){
+                window.location.reload()
+            }
+         })
+
+    })
+
+
     //define router
 
     // $.routes.add('/feedsite/{feedsiteid:word}', function() {

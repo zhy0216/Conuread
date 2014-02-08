@@ -119,6 +119,15 @@ class User(db.Document):
         Sub.add_sub(self,feedsite)
         return feedsite
 
+    def unsub_feedsite(self, feedsite=None):
+        from user_feed import Sub, ReadFeed
+        from feed import FeedSite
+
+        if self.has_feedsite(feedsite):
+            Sub.objects(user=self,feedsite=feedsite).delete()
+            ReadFeed.objects(user=self, feedsite=feedsite).delete()
+            return True
+
     def add_feedsite(self,feed_url=None):
         from user_feed import Sub
         from feed import FeedSite

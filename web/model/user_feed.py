@@ -60,6 +60,7 @@ class Sub(db.Document):
 
         return sub
 
+
     @classmethod
     def exist_sub(cls,user=None,feedsite=None):
         return cls.objects(user=user,feedsite=feedsite).first() is not None

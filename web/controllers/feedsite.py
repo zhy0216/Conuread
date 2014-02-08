@@ -55,6 +55,12 @@ def sub_site():
 
     return jsonify(dict(rcode=200, feedsite=site_dict))
 
+@app.route("/api/feedsite/<feedsiteid>/unsub", methods=["POST"])
+def unsub_site(feedsiteid):
+    feedsite  = FeedSite.get_feedsite_by_id(feedsiteid)
+    g.user.unsub_feedsite(feedsite)
+    return jsonify(dict(rcode=200))
+
 
 @app.route("/api/feedsite/<feedsiteid>", methods=["GET","POST"])
 def feeds(feedsiteid=None):
