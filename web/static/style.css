@@ -218,4 +218,17 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
 margin-right: 0px;
 }
 
-
+.key {
+background-color: #ebebeb;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+-webkit-box-shadow: 0 1px 0 #d8d8d8;
+box-shadow: 0 1px 0 #d8d8d8;
+display: inline-block;
+font-weight: 700;
+padding: 5px 0;
+text-align: center;
+width: 28px;
+font-size: .75em;
+}

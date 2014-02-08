@@ -50,7 +50,7 @@
     <div class="btn-group col-md-3 pull-right" style="padding-right: 0;">
        <div class="btn-group nav-help">
         <a class="btn btn-link cursor-pointer" data-toggle="modal" data-target="#faq-modal">FAQ</a> 
-        <a class="btn btn-link cursor-pointer" href="#1">Keyboard Shortcuts</a>
+        <a class="btn btn-link cursor-pointer" data-toggle="modal" data-target="#key-modal">Keyboard Shortcuts</a>
       </div>
 
 
@@ -81,7 +81,7 @@
   </div>
 </nav>
 
-<!-- Modal -->
+<!-- Modal FAQ-->
 <div class="modal fade" id="faq-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -91,12 +91,31 @@
       </div>
       <div class="modal-body">
         <ul>
-          <li>
-            <p>Test question</p>
-            <p>test answer</p>
-          </li>
+            <p>No question so far.</p>
+            <p>connect me: pyforyou#gmail.com</p>
 
         </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal KEYBOARd-->
+<div class="modal fade" id="key-modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Keyboard Shortcuts</h4>
+      </div>
+      <div class="modal-body">
+          <table>
+            <tr>
+              <td style="width: 180px;"><span class="key-des">Test</span></td>
+              <td><span class="key">K</span></td>
+            </tr>
+          </table>
       </div>
     </div>
   </div>

@@ -1,15 +1,11 @@
 
-* user can setting -> MVC ----> difficult
+* user can setting -> only unread_view attribute
 * user can share their rss sub -> /user/<userid>/rss??
-* when user login, he register a new user immedaitelty, then he can setup his username and password
-    or he just give up this right, anybody else may take it away
 
 
 
-* unsubscribe
-* a feedsite unsub
-* no search first
-
+* no search first -> use es or custom
+* mark all as read
 
 
 ================= BUG ===========================
