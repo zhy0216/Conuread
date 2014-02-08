@@ -93,6 +93,11 @@ class User(db.Document):
         rf  = ReadFeed.get_readfeed_by_feed_and_user(feed=feed,user=self)
         return not rf.unread
 
+    def has_feed(self, feed=None):
+        from user_feed import ReadFeed
+        rf  = ReadFeed.get_readfeed_by_feed_and_user(feed=feed,user=self)
+        return rf is not None
+
     def has_stared_feed(self, feed=None):
         from .user_feed import StarFeed
         return StarFeed.is_user_star_feed(user=self, feed=feed)
@@ -125,7 +130,7 @@ class User(db.Document):
 
         if self.has_feedsite(feedsite):
             Sub.objects(user=self,feedsite=feedsite).delete()
-            ReadFeed.objects(user=self, feedsite=feedsite).delete()
+            # ReadFeed.objects(user=self, feedsite=feedsite).delete()
             return True
 
     def add_feedsite(self,feed_url=None):
