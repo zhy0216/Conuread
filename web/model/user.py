@@ -13,6 +13,7 @@ class UserInfo(db.EmbeddedDocument):
     nickname    = db.StringField()
 
 class UserSetting(db.EmbeddedDocument):
+    unread_only = db.BooleanField(default=True)
     theme       = db.StringField(default="google")
 
 class User(db.Document):
