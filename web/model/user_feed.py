@@ -49,16 +49,17 @@ class Sub(db.Document):
         sub.user = user
         sub.feedsite = feedsite
         temp = feedsite.feed_item_counter
-        sub.unread_counter = temp if temp <=15 else 15
-        sub.start_date = feedsite.get_last_feed(skip=sub.unread_counter-1).create_date
-        sub.save()
+        
+        # sub.start_date = feedsite.get_last_feed(skip=sub.unread_counter-1).create_date
+        
 
         feeds = Feed.get_feed_items_by_site(site=feedsite,
                                               limit=temp)
-        for feed in feeds[:15]:
+        for feed in feeds[:500]:
             if not user.has_feed(feed=feed):
                 ReadFeed.add(feed=feed,user=user,feedsite=feedsite)
-
+                sub.unread_counter += 1
+        sub.save()
         return sub
 
 
@@ -154,7 +155,9 @@ class ReadFeed(db.Document):
                                      .only("feed").order_by("-feed__create_date")]
 
     @classmethod
-    def get_rencent_unread_feeds_by_user_feedsite(cls, user=None, feedsite=None):
+    def get_rencent_unread_feeds_by_user_feedsite(cls, user=None, feedsite=None, limit=15, page=1):
+        start = limit * page - limit
+        end = limit * page
         return [rf.feed for rf in cls.objects(user=user, unread=True, feedsite=feedsite)\
-                                     .only("feed").order_by("-feed__create_date")]
+                                     .only("feed").order_by("-feed__create_date")][start:end]
 

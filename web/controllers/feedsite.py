@@ -72,7 +72,7 @@ def feeds(feedsiteid=None):
     elif feedsiteid == "star":
         feeds = [feed.to_dict(user=g.user) for feed in g.user.get_star_feeds()]
     else:
-        feeds = [feed.to_dict() for feed in g.user.get_unread_feeds_on_feedsite(feedsiteid)]
+        feeds = [feed.to_dict() for feed in g.user.get_unread_feeds_on_feedsite(feedsite=feedsiteid)]
     return jsonify(dict(rcode=200, feeds=feeds))
 
 @app.route("/api/feedsite/<feedsiteid>/mark-all-as-read", methods=["POST"])

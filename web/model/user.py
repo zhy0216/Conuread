@@ -59,9 +59,12 @@ class User(db.Document):
 
         return ReadFeed.get_rencent_unread_feeds_by_user(user=self) 
 
-    def get_unread_feeds_on_feedsite(self, feedsite):
+    def get_unread_feeds_on_feedsite(self, feedsite=None, limit=15, page=1):
         from user_feed import ReadFeed
-        return ReadFeed.get_rencent_unread_feeds_by_user_feedsite(user=self,feedsite=feedsite)
+        return ReadFeed.get_rencent_unread_feeds_by_user_feedsite(user=self,
+                                                                  feedsite=feedsite, 
+                                                                  limit=limit, 
+                                                                  page=page)
 
     def get_feedsite(self):
         from user_feed import Sub
