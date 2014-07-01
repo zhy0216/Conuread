@@ -124,6 +124,7 @@ height: 100%;
 #content .panel{
   padding-right: 30px;
   padding-left: 50px;
+  overflow-x: hidden;
 }
 
 .unactive-panel .panel-heading{
@@ -137,7 +138,7 @@ color: black;
 .has-read-panel a{
   color: #999999;
 }
-.active-panel .panel-heading, 
+.active-panel .panel-heading,
 .has-read-panel .panel-heading{
 font-size: 24px;
 font-weight: 300;
@@ -260,7 +261,7 @@ margin-bottom: 500px;
   height: 100%;
   width: 6px;
   display: inline-block;
-  
+
   -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
   animation: stretchdelay 1.2s infinite ease-in-out;
 }
@@ -286,15 +287,15 @@ margin-bottom: 500px;
 }
 
 @-webkit-keyframes stretchdelay {
-  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
   20% { -webkit-transform: scaleY(1.0) }
 }
 
 @keyframes stretchdelay {
-  0%, 40%, 100% { 
+  0%, 40%, 100% {
     transform: scaleY(0.4);
     -webkit-transform: scaleY(0.4);
-  }  20% { 
+  }  20% {
     transform: scaleY(1.0);
     -webkit-transform: scaleY(1.0);
   }
@@ -314,4 +315,8 @@ margin-bottom: 500px;
   height: 35px;
   font-size: 13px;
   font-weight: bold;
+}
+
+#item-read-style{
+  margin-left: -15px;
 }

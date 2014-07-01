@@ -5,3 +5,5 @@ local_conf.py
 *.nja
 web/static/bower_components/
 main_bundle.js
+env/
+.DS_Store

@@ -1,12 +1,4 @@
 
-* user can setting -> only unread_view attribute
-* user can share their rss sub -> /user/<userid>/rss??
-
-
-
-* no search first -> use es or custom
-* mark all as read
-
 
 ================= BUG ===========================
 right click, new open bug, feeditem
