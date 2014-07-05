@@ -36,6 +36,17 @@ require("./libs/bootstrap/js/bootstrap.js");
     signal.subscribe("mark-all-as-read", function(){
         console.log("mark-all-as-rea signal");
         // get this cur feedsite and mark it as read
+        //  api: /api/feedsite/<feedsiteid>/mark-all-as-read
+
+        var feedsiteid = subchooser.currentActiveItem.attr("feedsiteid");
+        $.post("/api/feedsite/" + feedsiteid + "/mark-all-as-read",function(data){
+            console.log(data);
+            if(data.rcode == 200){
+                console.log("sure");
+
+            }
+        })
+
     })
 
 

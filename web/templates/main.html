@@ -16,7 +16,12 @@
     <div id="subsribe-chooser" class="list-group scrollable">
         <span class="list-group-header">My SubScribes</span>
 
-      <a  id="all-item-btn" href="#" class="list-group-item sub-btn" feedsiteid="all"><span class="badge counter">{{cur_user.get_unread_counter()}}</span><i class="glyphicon glyphicon-th-list"></i> All Items</a>
+      <a  id="all-item-btn" href="#" class="list-group-item sub-btn" feedsiteid="all">
+        {%if cur_user.get_unread_counter()%}
+        <span class="badge counter">{{cur_user.get_unread_counter()}}</span>
+        {%endif%}
+        <i class="glyphicon glyphicon-th-list"></i> All Items
+      </a>
       <a  id="star-item-btn" href="#" class="list-group-item sub-btn" feedsiteid="star"><i class="glyphicon glyphicon-star"></i> Start Items</a>
 
 

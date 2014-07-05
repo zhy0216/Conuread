@@ -27,12 +27,12 @@ def clean_db():
 @manager.command
 def make_guest():
     from web.model import BasicUser,UserInfo
-    b_user = BasicUser(email="guest",
+    b_user = BasicUser(username="guest",
                        password="guest",
                        info=UserInfo())
     b_user.info.nickname = "Guest"
     b_user.save()
-    
+
 @manager.command
 def test_init():
     clean_db()
@@ -46,7 +46,7 @@ def test_add():
     test_url1 = "http://solidot.org.feedsportal.com/c/33236/f/556826/index.rss"
     site0 = FeedSite.add_from_feed_url(test_url0)
     site1 = FeedSite.add_from_feed_url(test_url1)
-    b_user = BasicUser.get_user_by_nickname("Guest")
+    b_user = BasicUser.get_guest()
     b_user.sub_feedsite(site0)
     b_user.sub_feedsite(site1)
 

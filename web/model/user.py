@@ -49,7 +49,7 @@ class User(db.Document):
 
     def is_activate(self):
         return self.activate
-    
+
     def activate_me(self):
         self.activate = True
         return self.save()
@@ -57,13 +57,13 @@ class User(db.Document):
     def get_rencent_unread_feeds(self):
         from user_feed import ReadFeed
 
-        return ReadFeed.get_rencent_unread_feeds_by_user(user=self) 
+        return ReadFeed.get_rencent_unread_feeds_by_user(user=self)
 
     def get_unread_feeds_on_feedsite(self, feedsite=None, limit=15, page=1):
         from user_feed import ReadFeed
         return ReadFeed.get_rencent_unread_feeds_by_user_feedsite(user=self,
-                                                                  feedsite=feedsite, 
-                                                                  limit=limit, 
+                                                                  feedsite=feedsite,
+                                                                  limit=limit,
                                                                   page=page)
 
     def get_feedsite(self):
@@ -174,7 +174,7 @@ class BasicUser(User):
 
 
     @classmethod
-    def register(cls, username=None, 
+    def register(cls, username=None,
                  nickname=None, password=None):
         from flask import g
         g.user.username = username
@@ -189,6 +189,10 @@ class BasicUser(User):
 
     def subscribe(self,site):
         pass
+
+    @classmethod
+    def get_guest(cls):
+        return cls.objects(username="guest").first()
 
 class AdvancedUser(User):
     pass

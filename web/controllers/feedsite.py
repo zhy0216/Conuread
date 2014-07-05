@@ -7,7 +7,7 @@ from flask import (render_template, g, session,
 
 from web.app import app
 from web.model import (User, UserInfo,UserSetting,BasicUser,
-                        AdvancedUser,FeedSite, Feed, Sub)
+                        AdvancedUser,FeedSite, Feed, Sub, ReadFeed)
 
 
 
@@ -32,7 +32,7 @@ def read_site(feedsiteid="all"):
     else:
         pass
 
-    return render_template("main.html", 
+    return render_template("main.html",
                             sites=site_dict,
                             feeds=feeds,
                             feedsiteid=feedsiteid)
@@ -79,6 +79,19 @@ def feeds(feedsiteid=None):
 def mark_all_as_read(feedsiteid=None):
     if feedsiteid is None:
         return jsonify(dict(rcode=404))
+
+    # TODO: consider all
+
+    sub  = Sub.get_sub_by_user_feedsite(user=g.user,
+                                        feedsite=feedsiteid)
+    sub.unread_counter = 0
+    sub.save()
+    ReadFeed.objects(feedsite=feedsiteid, 
+                    user=g.user, unread=True).update(set__unread=False)
+
+
+    return jsonify(dict(rcode=200))
+
 
 
 
