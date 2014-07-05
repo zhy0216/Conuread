@@ -1,4 +1,4 @@
-var $ = require("jquery");
+var $ = jQuery = require("jquery");
 var _ = require("underscore");
 var signal = require('signal').createSignal(); 
 
@@ -10,6 +10,7 @@ var UserPlugin = require("page/userplugin").UserPlugin;
 
 require("jquery.routes");
 require("jquery.ba-outside-events");
+require("jquery.hotkeys");
 require("./libs/bootstrap/js/bootstrap.js");
 
 ﻿$(function(){
@@ -48,6 +49,11 @@ require("./libs/bootstrap/js/bootstrap.js");
         })
 
     })
+
+    $(document).bind('keyup', 'n', function(){
+        contentShower.scrollNext()
+
+    });
 
 
     $(document).on("click", "[unsubid]", function(){
