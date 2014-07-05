@@ -45,7 +45,7 @@ class Feed(db.Document):
                 "link":self.link,
                 "content":self.content,
                 "summary":self.summary,
-                "createDate":self.create_date,
+                "createDate":self.create_date.strftime("%Y-%m-%d %H:%M"),
                 "feedsiteid":str(self.feedsite.id),
                 "author":self.feedsite.title
         }

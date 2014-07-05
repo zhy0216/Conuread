@@ -104,7 +104,7 @@ var curActiveFeedSiteId = {{feedsiteid|tojson}};
 <div class="panel panel-default unactive-panel {%if feed.isRead%}has-read-panel text-muted{%endif%}" feedid="{{feed.id}}" feedsiteid="{{feed.feedsiteid}}">
   <div class="panel-heading">
     <a href="javascript:window.open('{{feed.link}}')">{{feed.title}}</a>
-    <small class="pull-right feed-extra-info text-muted">{{feed.author}} - {{feed.createDate}}</small>
+    <small class="pull-right feed-extra-info text-muted">{{feed.author}}  {{feed.createDate}}</small>
   </div>
   <div class="panel-body">
     {{feed.content|safe}}
