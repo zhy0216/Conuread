@@ -51,7 +51,8 @@ require("./libs/bootstrap/js/bootstrap.js");
     })
 
     $(document).bind('keyup', 'n', function(){
-        contentShower.scrollNext()
+        console.log("scrollNext")
+        contentShower.scrollNext();
 
     });
 
