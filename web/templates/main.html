@@ -1,7 +1,7 @@
 {%extends "base.html"%}
 
 {%block content%}
-  <div id="sidebar" class="col-md-2">
+  <div id="sidebar" class="col-md-2 scrollable">
     <div id="logo" class="text-center">
         <h1>Conureader</h1>
         <small class="text-muted"><em>a google reader clone</em></small>
@@ -13,7 +13,7 @@
 
     <!-- <a id="explore-btn" href="#" class="list-group-item text-center" >Explore</a> -->
 
-    <div id="subsribe-chooser" class="list-group scrollable">
+    <div id="subsribe-chooser" class="list-group">
         <span class="list-group-header">My SubScribes</span>
 
       <a  id="all-item-btn" href="#" class="list-group-item sub-btn" feedsiteid="all">
@@ -26,6 +26,19 @@
 
 
     </div>
+
+    <div id="pop-item-list" class="list-group">
+        <span class="list-group-header">Popular SubScribes</span>
+      {%for feedsite in popular_site_list%}
+      <a  href="#" class="list-group-item sub-btn" pop-feedsiteid="{{feedsite.id}}">
+        <img src="http://getfavicon.appspot.com/http://{{feedsite.domain}}" class="favicon">
+      {{feedsite.title}}
+      </a>
+      {%endfor%}
+
+    </div>
+
+
   </div>
 
 

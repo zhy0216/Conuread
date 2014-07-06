@@ -35,7 +35,8 @@ def read_site(feedsiteid="all"):
     return render_template("main.html",
                             sites=site_dict,
                             feeds=feeds,
-                            feedsiteid=feedsiteid)
+                            feedsiteid=feedsiteid,
+                            popular_site_list=FeedSite.objects()[:10])
 
 
 

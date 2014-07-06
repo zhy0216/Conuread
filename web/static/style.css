@@ -98,10 +98,11 @@ margin-bottom: 1px;
     /*min-width: 200px;*/
     padding-right: 0;
     padding-left:0;
+    overflow-y: auto; 
 }
 #sidebar .list-group{
-    height: -webkit-calc(100% - 175px);
-    overflow-y: auto;
+    /*height: -webkit-calc(100% - 175px);*/
+    /*overflow-y: auto;*/
 }
 
 #sidebar .list-group-item{
