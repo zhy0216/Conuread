@@ -3,7 +3,7 @@
 import hashlib
 
 from flask import (render_template, g, session,
-                   jsonify, request,redirect)
+                   jsonify, request,redirect, flash)
 
 from web.app import app
 from web.model import (User, UserInfo,UserSetting,BasicUser,
@@ -19,7 +19,9 @@ def login():
     user = User.validate_user(username=username, 
                               password=password)
     if user is None:
-        return jsonify(dict(rcode=404))
+        flash("user/password error!")
+
+        return redirect("/")
 
     g.user = user
     session["user"] = g.user.to_dict()

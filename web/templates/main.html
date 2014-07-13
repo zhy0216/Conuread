@@ -57,9 +57,16 @@
   <div id="content-container" class="col-md-10">
 
   <div class="col-md-12" style="margin-top:5px">
-    <div class="alert alert-warning fade in notifier">
-      test  
-    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div id="alert-notifier" class="alert alert-warning fade in notifier text-center">
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
       {%include "toolbar.html"%}
 
   </div>

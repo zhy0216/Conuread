@@ -79,6 +79,9 @@ class User(db.Document):
         from user_feed import ReadFeed,Sub
         rf  = ReadFeed.get_readfeed_by_feed_and_user(feed=feed,
                                         user=self)
+        if rf is None:
+            return 
+
         if rf.unread:
             sub  = Sub.get_sub_by_user_feedsite(user=self,
                                                   feedsite=feed.feedsite)

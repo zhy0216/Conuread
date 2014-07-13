@@ -307,11 +307,11 @@ margin-bottom: 500px;
 
 /*notifier*/
 .notifier{
-      /*width: 200px;*/
-  display: none;
+      width: 200px;
+  /*display: none;*/
   position: absolute;
   z-index: 10000000;
-  top: -5px;
+  top: 60px;
   right: 50%;
   height: 35px;
   font-size: 13px;
