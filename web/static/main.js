@@ -37,6 +37,17 @@ $(function() {
         })
     });
 
+    signal.subscribe('pop-feedsite-fetch', function(feedsiteid) {
+        console.log(feedsiteid);
+        $.post("/api/pop-feedsite/" + feedsiteid, function(data) {
+            console.log(data);
+            if (data.rcode == 200) {
+                contentShower.setFeedListData(data.feeds);
+                contentShower.scrollTop().cleanTarget().render();
+            }
+        })
+    });
+
     signal.subscribe("mark-all-as-read", function() {
         console.log("mark-all-as-rea signal");
         // get this cur feedsite and mark it as read
