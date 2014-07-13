@@ -302,7 +302,9 @@ margin-bottom: 500px;
   }
 }
 
-
+.popover.fade{
+  position: fixed;
+}
 
 
 /*notifier*/

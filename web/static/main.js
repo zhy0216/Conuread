@@ -28,6 +28,7 @@ $(function() {
     signal.subscribe('feed-read', subchooser.feedReadAction);
     signal.subscribe('feedsite-fetch', function(feedsiteid) {
         console.log(feedsiteid);
+        $("#waiter").hide();
         $.post("/api/feedsite/" + feedsiteid, function(data) {
             console.log(data);
             if (data.rcode == 200) {
@@ -39,6 +40,7 @@ $(function() {
 
     signal.subscribe('pop-feedsite-fetch', function(feedsiteid) {
         console.log(feedsiteid);
+        $("#waiter").hide();
         $.post("/api/pop-feedsite/" + feedsiteid, function(data) {
             console.log(data);
             if (data.rcode == 200) {
