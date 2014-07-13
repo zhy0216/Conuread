@@ -33,11 +33,13 @@
       <a  href="#" class="list-group-item sub-btn" pop-feedsiteid="{{feedsite.id}}">
         <img src="http://getfavicon.appspot.com/http://{{feedsite.domain}}" class="favicon">
         {{feedsite.title}}
+        <span class="badge" style="background:none;margin-top:0px;">
+        <button class="btn btn-xs btn-danger pop-sub-btn"><i class="glyphicon glyphicon-plus"></i></button>
+        </span>
       </a>
       {%endfor%}
     </div>
 
-    // consider random site item
 
 
   </div>
