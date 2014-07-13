@@ -115,7 +115,11 @@ var curActiveFeedSiteId = {{feedsiteid|tojson}};
 <script type="text/template" id="feedSiteHeadTemplate">
 {%raw%}
  <hr />
-<h2 style="margin-top: -10px;margin-bottom: 10px;">{{site.title}} | <a href="javascript:void(0);" unsubid={{site.id}}>unsubscribe</a></h2>
+<h2 style="margin-top: -10px;margin-bottom: 10px;">
+{%if site%}
+  {{site.title}} | <a href="javascript:void(0);" unsubid={{site.id}}>unsubscribe</a>
+{%endif%}
+</h2>
 {%endraw%}
 </script>
 
