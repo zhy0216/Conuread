@@ -41,7 +41,7 @@ $(function() {
     signal.subscribe('pop-feedsite-fetch', function(feedsiteid) {
         console.log(feedsiteid);
         $("#waiter").hide();
-        $.post("/api/pop-feedsite/" + feedsiteid, function(data) {
+        $.post("/api/pop-feedsite/" + feedsiteid + "/", function(data) {
             console.log(data);
             if (data.rcode == 200) {
                 contentShower.setFeedListData(data.feeds);
