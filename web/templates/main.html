@@ -31,7 +31,7 @@
         <span class="list-group-header">Popular SubScribes</span>
       {%for feedsite in popular_site_list%}
       <a  href="#" class="list-group-item sub-btn" pop-feedsiteid="{{feedsite.id}}">
-        <img src="http://getfavicon.appspot.com/http://{{feedsite.domain}}" class="favicon">
+        <img src="https://www.google.com/s2/favicons?domain={{feedsite.domain}}" class="favicon">
         {{feedsite.title}}
         <span class="badge" style="background:none;margin-top:0px;">
         <button class="btn btn-xs btn-danger pop-sub-btn"><i class="glyphicon glyphicon-plus"></i></button>
@@ -159,7 +159,7 @@ var curActiveFeedSiteId = {{feedsiteid|tojson}};
 {%if site.unreadCount != 0%}
 <span class="badge">{{site.unreadCount}}</span>
 {%endif%}
-<img src="http://getfavicon.appspot.com/http://{{site.domain}}" class="favicon">
+<img src="https://www.google.com/s2/favicons?domain={{site.domain}}" class="favicon">
   {{site.title}}
 </a>
 {%endfor%}
