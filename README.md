@@ -5,7 +5,7 @@ A readl world RSS reader which show all my respects for [google reader](http://w
 
 **Warning**: this app is under development.
 
-### [Demo](http://read.py4u.com/)
+### [Demo](http://read.lazyang.com/)
 
 
 Install
